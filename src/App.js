@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
+import SummonerSearch from './components/SummonerSearch/SummonerSearch'
 import './App.css'
 
 class App extends Component {
-  state = {
-    currentSummoner: '',
-    summonerInput: ''
-  }
-
-  clickTest () {
-    console.log('>>>')
-  }
-
   render () {
     return (
       <div >
         <div>
-          <h2>{this.state.msg}</h2>
-          <button onClick={this.clickTest}>foo</button>
+          <SummonerSearch />
+          {/* <SummonerHistory /> */}
         </div>
       </div>
     )
