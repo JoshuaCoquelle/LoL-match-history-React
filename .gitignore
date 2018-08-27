@@ -13,6 +13,7 @@ server/node_modules
 # misc
 .DS_Store
 .env
+keys
 
 npm-debug.log*
 yarn-debug.log*

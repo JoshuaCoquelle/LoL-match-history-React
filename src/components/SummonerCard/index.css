@@ -5,10 +5,11 @@
 */
 
 .card {
-  padding: 20px;
+  padding: 30px;
   min-height: 170px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   background: var(--theme-blue-secondary);
+  box-shadow: 3px 2px 24px -5px rgba(140, 255, 161, 0.8);
 }
 
 .card > section {
@@ -82,6 +83,11 @@
 
 .card__footer {
   display: flex;
+}
+
+.card__footer ul {
+  padding: 5px 0;
+  line-height: 1.5;
 }
 
 .card__footer li {
