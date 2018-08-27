@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { searchSummoner } = require('../api.service')
+const { searchSummonerHandler } = require('../api.service')
 
-router.get('/summoner/:name', searchSummoner)
+router.get('/summoner/:name', searchSummonerHandler)
 
 module.exports = router
