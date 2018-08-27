@@ -1,15 +1,15 @@
 .search {
   display: flex;
-  justify-content: center;
   margin-bottom: 20px;
+  justify-content: center;
 }
 
 .search__input {
-  height: 40px;
   flex: 1;
-  border-radius: 2px;
-  outline: none;
+  height: 40px;
   border: none;
+  outline: none;
+  border-radius: 2px;
   padding-left: 10px;
   font-size: var(--theme-font-sm);
   color: var(--theme-grey-secondary);

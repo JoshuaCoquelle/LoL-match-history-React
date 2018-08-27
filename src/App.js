@@ -12,10 +12,9 @@ class App extends Component {
   async handleSearch (value) {
     try {
       const response = await axios.get(`http://localhost:3001/api/summoner/${value}`)
-      const itemsJSON = await axios.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/item.json')
-      const matchHistory = response.data.matches
-      const itemIdCollection = itemsJSON.data.data
+      const { payload } = response.data
 
+      this.setState({ matchHistory: payload })
     } catch (err) {
       console.warn(err)
     }
@@ -34,7 +33,7 @@ class App extends Component {
             placeholder='summmoner name'
           />
 
-          <SummonerHistory />
+          <SummonerHistory matches={[1,2,3]}/>
         </section>
       </main>
     )

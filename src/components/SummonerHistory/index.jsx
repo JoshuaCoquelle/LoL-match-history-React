@@ -2,15 +2,18 @@ import React from 'react'
 import SummonerCard from '../SummonerCard/index'
 import './index.css'
 
-const SummonerHistory = (props) => {
+const renderMatchCards = (matches) => {
+  return matches.map((card, $i) => <SummonerCard key={$i} />)
+}
+
+const SummonerHistory = ({ matches }) => {
   return (
     <div className='history'>
       <p className='history__latest-msg'>
-        showing latest 10 matches
+        showing latest 5 matches
       </p>
 
-      <SummonerCard />
-      <SummonerCard />
+      {renderMatchCards(matches)}
     </div>
   )
 }

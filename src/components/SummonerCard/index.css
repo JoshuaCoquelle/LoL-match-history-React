@@ -7,13 +7,22 @@
 .card {
   padding: 30px;
   min-height: 170px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   background: var(--theme-blue-secondary);
-  box-shadow: 3px 2px 24px -5px rgba(140, 255, 161, 0.8);
+  animation: card-glow 1.3s infinite alternate;
 }
 
 .card > section {
   margin-bottom: 10px;
+}
+
+@keyframes card-glow {
+  from {
+    box-shadow: 2px 1px 12px -2px rgba(140, 255, 161, 0.8);
+  }
+  to {
+    box-shadow: 2px 1px 12px 2px rgba(140, 255, 161, 0.8);
+  }
 }
 
 /*
@@ -86,8 +95,12 @@
 }
 
 .card__footer ul {
-  padding: 5px 0;
   line-height: 1.5;
+  border: 2px solid rgba(140, 255, 161, .5);
+  border-right: none;
+  border-left: none;
+  margin: 10px 0;
+  padding: 10px 0;
 }
 
 .card__footer li {

@@ -1,4 +1,4 @@
-.app .app__title {
+.app__title {
   font-size: 26px;
   font-weight: 600;
   color: var(--theme-grey-primary);
@@ -6,8 +6,8 @@
   padding: 20px 25px;
 }
 
-.app .app__content {
+.app__content {
   padding: 20px;
   margin: auto;
-  max-width: 600px;
+  max-width: 400px;
 }

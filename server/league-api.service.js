@@ -15,9 +15,9 @@ module.exports = class LeagueAPI {
       const accountId = await LeagueAPI.accountIdByName(summonerByName, params.name)
       const matchlist = await LeagueAPI.matchlistByAccountId(summonerMatchlist, accountId)
       const matches = await LeagueAPI.getMatchesBatch(5, summonerGameData, matchlist)
-      LeagueAPI._buildPayload(accountId, matches)
+      const payload = LeagueAPI._buildPayload(accountId, matches)
 
-      res.status(200).json({})
+      res.status(200).json({ payload })
     } catch (err) {
       res.status(500).json({ err })
     }
@@ -60,13 +60,12 @@ module.exports = class LeagueAPI {
   }
 
   static _buildPayload (accountId, matches) {
-    matches.map(match => {
+    return matches.map(match => {
       const playerId = LeagueAPI._parsePlayerId(accountId, match.participantIdentities)
       const playerMatchData = LeagueAPI._parsePlayerMatchData(playerId, match.participants)
       const stats = LeagueAPI._parseStatsForPayload(playerMatchData, match.gameDuration)
 
-      console.log('----------------------------------')
-      console.log(stats)
+      return stats
     })
   }
 
@@ -80,16 +79,17 @@ module.exports = class LeagueAPI {
     return participants
       .filter(participant => participant.participantId === playerId)
       .map(playerData => {
-        const { stats, spell1Id, spell2Id } = playerData
-        return { stats, spell1Id, spell2Id }
+        const { stats, spell1Id, spell2Id, championId } = playerData
+        return { stats, spell1Id, spell2Id, championId }
       })
   }
 
   static _parseStatsForPayload (playerData, gameDuration) {
     return playerData.reduce((accum, data) => {
-      const { stats, spell1Id, spell2Id } = data
+      const { stats, spell1Id, spell2Id, championId } = data
 
       return {
+        championId,
         win: stats.win,
         champLevel: stats.champLevel,
         creepScore: stats.totalMinionsKilled,
