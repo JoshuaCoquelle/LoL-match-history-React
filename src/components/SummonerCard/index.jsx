@@ -5,7 +5,7 @@ const SummonerCard = (props) => {
   const [K, D, A] = props.kda
 
   return (
-    <article className='card'>
+    <article className={props.win ? 'card card--won' : 'card card--lost'}>
       <section className='card__header'>
         <p className='card__header__title'>
           NAME
@@ -40,8 +40,8 @@ const SummonerCard = (props) => {
       </section>
 
       <section className='card__footer'>
-        <div className='card__footer__runes'>
-          <p>Runes</p>
+        <div className='card__footer__spells'>
+          <p>Spells</p>
           <ul>{
             props.spells.map(spell => <li>{spell}</li>)
           }</ul>

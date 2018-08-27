@@ -13,22 +13,13 @@ const renderMatchCards = ({ accountName, latestMatches }) => {
     )
   })
 
-  // const cards = latestMatches.map((card, $i) => (
-  //   console.log(card)
-  //   console.log('------------------------')
-
-  //   <SummonerCard
-  //     key={$i}
-  //     accountName={accountName}
-  //   />
-  // ))
-
   if (cards.length) {
     return (
       <div>
         <p className='history__latest-msg'>
           showing latest {cards.length} matches
         </p>
+
         {cards}
       </div>
     )

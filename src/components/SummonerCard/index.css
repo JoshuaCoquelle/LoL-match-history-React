@@ -10,7 +10,15 @@
   margin-bottom: 40px;
   border-radius: 25px;
   background: var(--theme-blue-secondary);
-  animation: card-glow 1.3s infinite alternate;
+}
+
+.card--won {
+  color: var(--theme-success);
+  animation: card-glow 1s infinite alternate;
+}
+
+.card--lost {
+  color: var(--theme-error);
 }
 
 .card > section {
@@ -19,9 +27,9 @@
 
 @keyframes card-glow {
   from {
-    box-shadow: 4px 2px 26px -10px rgba(140, 255, 161, 0.8)
+    box-shadow: 5px 3px 33px 2px rgba(140, 255, 161, 0.8)
   } to {
-    box-shadow: 4px 2px 34px -10px rgba(140, 255, 161, 0.8)
+    box-shadow: 4px 2px 34px -6px rgba(140, 255, 161, 0.8)
   }
 }
 
@@ -38,13 +46,13 @@
   justify-content: space-between;
 }
 
-.card__header__title {
-  color: var(--theme-success);
-  font-size: var(--theme-font-sm);
-}
+.card__header__title { font-size: var(--theme-font-sm); }
+.card--won
+.card__header__title { color: var(--theme-success); }
+.card--lost
+.card__header__title { color: var(--theme-error); }
 
 .card__header__status {
-  color: #666;
   height: 20px;
   display: flex;
   padding: 0 10px;
@@ -52,10 +60,16 @@
   font-weight: 600;
   border-radius: 10px;
   align-items: center;
-  background: var(--theme-success);
   justify-content: center;
+  background: var(--theme-success);
   font-size: var(--theme-font-xs);
+  color: var(--theme-blue-secondary);
 }
+
+.card--won
+.card__header__status { background: var(--theme-success); }
+.card--lost
+.card__header__status { background: var(--theme-error); }
 
 /*
 -------------------------------------------------
@@ -113,7 +127,7 @@
   color: var(--theme-grey-primary);
 }
 
-.card__footer__runes,
+.card__footer__spells,
 .card__footer__items {
   min-height: 75px;
   flex-basis: 100%;

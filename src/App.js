@@ -1,7 +1,12 @@
+// Vendor
 import axios from 'axios'
 import React, { Component } from 'react'
+
+// Comps
 import SummonerSearch from './components/SummonerSearch'
 import SummonerHistory from './components/SummonerHistory'
+
+// Styles
 import './App.css'
 
 class App extends Component {
@@ -10,16 +15,14 @@ class App extends Component {
     latestMatches: []
   }
 
-  async handleSearch (accountName) {
+  handleSearch = async (accountName) => {
     if (!accountName) return
 
     try {
       const { data } = await axios.get(`http://localhost:3001/api/summoner/${accountName}`)
+      const latestMatches = data.payload
 
-      this.setState({
-        accountName,
-        latestMatches: data.payload
-      })
+      this.setState({ accountName, latestMatches })
     } catch (err) {
       console.warn(err)
     }
@@ -35,7 +38,7 @@ class App extends Component {
         <section className='app__content'>
           <SummonerSearch
             handleSearch={this.handleSearch.bind(this)}
-            placeholder='summmoner name'
+            placeholder='enter thy summmoner name, pleb'
           />
 
           <SummonerHistory
