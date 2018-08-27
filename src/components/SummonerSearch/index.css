@@ -1,0 +1,26 @@
+.summoner-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.summoner-search__input {
+  height: 40px;
+  width: 240px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  font-size: var(--theme-font-sm);
+  color: var(--theme-grey-secondary);
+}
+
+.summoner-search__btn {
+  height: 40px;
+  width: 70px;
+  margin-left: 10px;
+  border-radius: 2px;
+  border: 1px solid #2D3D56;
+  color: var(--theme-grey-primary);
+  background: var(--theme-blue-secondary);
+}

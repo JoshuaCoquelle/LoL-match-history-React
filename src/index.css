@@ -8,15 +8,17 @@
   --theme-blue-primary: #1E2733;
   --theme-blue-secondary: #273243;
   --theme-grey-primary: #E5E5E5;
+  --theme-grey-secondary: #707070;
   --theme-success: #7FF1A5;
   --theme-error: #FF8E8E;
 
   /* theme font sizes */
-  --theme-font-xs: 8px;
-  --theme-font-sm: 10px;
-  --theme-font-md: 12px;
-  --theme-font-lg: 14px;
-  --theme-font-xl: 16px;
+  --theme-font-xs: 10px;
+  --theme-font-sm: 12px;
+  --theme-font-md: 14px;
+  --theme-font-lg: 16px;
+  --theme-font-xl: 20px;
+  --theme-font-xxl: 30px;
 }
 
 /*
@@ -29,6 +31,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
