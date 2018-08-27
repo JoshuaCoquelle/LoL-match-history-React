@@ -15,9 +15,9 @@ module.exports = class LeagueAPI {
       const accountId = await LeagueAPI.accountIdByName(summonerByName, params.name)
       const matchlist = await LeagueAPI.matchlistByAccountId(summonerMatchlist, accountId)
       const matches = await LeagueAPI.getMatchesBatch(5, summonerGameData, matchlist)
-      const data = { accountId, matches }
+      LeagueAPI._buildPayload(accountId, matches)
 
-      res.status(200).json(data)
+      res.status(200).json({})
     } catch (err) {
       res.status(500).json({ err })
     }
@@ -57,5 +57,52 @@ module.exports = class LeagueAPI {
     } catch (err) {
       console.error(err)
     }
+  }
+
+  static _buildPayload (accountId, matches) {
+    matches.map(match => {
+      const playerId = LeagueAPI._parsePlayerId(accountId, match.participantIdentities)
+      const playerMatchData = LeagueAPI._parsePlayerMatchData(playerId, match.participants)
+      const stats = LeagueAPI._parseStatsForPayload(playerMatchData, match.gameDuration)
+
+      console.log('----------------------------------')
+      console.log(stats)
+    })
+  }
+
+  static _parsePlayerId (accountId, participantIdentities) {
+    return participantIdentities
+      .filter(participant => participant.player.accountId === accountId)
+      .map(player => player.participantId)[0]
+  }
+
+  static _parsePlayerMatchData (playerId, participants) {
+    return participants
+      .filter(participant => participant.participantId === playerId)
+      .map(playerData => {
+        const { stats, spell1Id, spell2Id } = playerData
+        return { stats, spell1Id, spell2Id }
+      })
+  }
+
+  static _parseStatsForPayload (playerData, gameDuration) {
+    return playerData.reduce((accum, data) => {
+      const { stats, spell1Id, spell2Id } = data
+
+      return {
+        win: stats.win,
+        champLevel: stats.champLevel,
+        creepScore: stats.totalMinionsKilled,
+        creepScorePerMin: +(stats.totalMinionsKilled / (gameDuration / 60)).toFixed(1),
+        kda: [stats.kills, stats.deaths, stats.assists],
+        spells: [spell1Id, spell2Id],
+        items: [stats.item0, stats.item1, stats.item2, stats.item3, stats.item4, stats.item5, stats.item6],
+        get gameDuration () {
+          const duration = new Date(0)
+          duration.setSeconds(gameDuration)
+          return duration.toISOString().substr(11, 8)
+        }
+      }
+    }, {})
   }
 }
