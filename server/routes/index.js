@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { searchSummonerHandler } = require('../api.service')
+const LeagueAPI = require('../league-api.service')
 
-router.get('/summoner/:name', searchSummonerHandler)
+router.get('/summoner/:name', LeagueAPI.searchSummonerHandler)
 
 module.exports = router
