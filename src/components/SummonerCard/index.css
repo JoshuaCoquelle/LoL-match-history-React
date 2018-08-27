@@ -1,25 +1,39 @@
-.summoner-card {
-  padding: 0 10px;
+/*
+-------------------------------------------------
+| Card
+-------------------------------------------------
+*/
+
+.card {
+  padding: 20px;
   min-height: 170px;
   margin-bottom: 20px;
   background: var(--theme-blue-secondary);
 }
 
-.summoner-card__header {
+.card > section {
+  margin-bottom: 10px;
+}
+
+/*
+-------------------------------------------------
+| Card Header
+-------------------------------------------------
+*/
+
+.card__header {
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.summoner-card__header >
-.summoner-card__header__title {
+.card__header__title {
   color: var(--theme-success);
   font-size: var(--theme-font-sm);
 }
 
-.summoner-card__header >
-.summoner-card__header__status {
+.card__header__status {
   color: #666;
   height: 20px;
   display: flex;
@@ -28,17 +42,61 @@
   font-weight: 600;
   border-radius: 10px;
   align-items: center;
-  background: #4fffa7;
+  background: var(--theme-success);
   justify-content: center;
   font-size: var(--theme-font-xs);
 }
 
-.summoner-card__body {}
-.summoner-card__body__account {
-  padding: 10px 0;
+/*
+-------------------------------------------------
+| Card Body
+-------------------------------------------------
+*/
+
+.card__body__account {
   font-weight: bold;
   color: var(--theme-grey-primary);
   font-size: var(--theme-font-sm);
 }
 
-.summoner-card__footer {}
+.card__body__stats {
+  display: flex;
+}
+
+.card__body__stats p {
+  padding: 5px 0;
+}
+
+.card__body__stats div {
+  padding: 10px 0;
+  margin-right: 20px;
+  font-size: var(--theme-font-sm);
+  color: var(--theme-grey-primary);
+}
+
+/*
+-------------------------------------------------
+| Card Footer
+-------------------------------------------------
+*/
+
+.card__footer {
+  display: flex;
+}
+
+.card__footer li {
+  font-size: var(--theme-font-sm);
+  color: var(--theme-grey-primary);
+  list-style: none;
+}
+
+.card__footer p {
+  font-size: var(--theme-font-md);
+  color: var(--theme-grey-primary);
+}
+
+.card__footer__runes,
+.card__footer__items {
+  min-height: 75px;
+  width: 100%;
+}

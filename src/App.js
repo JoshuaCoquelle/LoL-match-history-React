@@ -6,19 +6,19 @@ import './App.css'
 class App extends Component {
   render () {
     return (
-      <div className='app'>
-        <h1 className='app__title'>
+      <main className='app'>
+        <header className='app__title'>
           SUMMONER SEARCH
-        </h1>
+        </header>
 
-        <div className='app__content'>
+        <section className='app__content'>
           <SummonerSearch
             placeholder='summmoner name'
           />
 
           <SummonerHistory />
-        </div>
-      </div>
+        </section>
+      </main>
     )
   }
 }
