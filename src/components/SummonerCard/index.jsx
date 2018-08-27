@@ -2,6 +2,8 @@ import React from 'react'
 import './index.css'
 
 const SummonerCard = (props) => {
+  const [K, D, A] = props.kda
+
   return (
     <article className='card'>
       <section className='card__header'>
@@ -10,29 +12,29 @@ const SummonerCard = (props) => {
         </p>
 
         <div className='card__header__status'>
-          <p>VICTORY</p>
+          <p>{props.win ? 'VICTORY' : 'DEFEAT'}</p>
         </div>
       </section>
 
       <section className='card__body'>
         <p className='card__body__account'>
-          BFY MEOWINGTON
+          {props.accountName}
         </p>
 
         <div className='card__body__stats'>
           <div className='card__body__stats__KDA'>
             <p>K / D/ A </p>
-            <strong>13 - 24 - 2</strong>
+            <strong>{K} / {D} / {A}</strong>
           </div>
 
           <div className='card__body__stats__CS'>
             <p>Creep Score</p>
-            <strong>245 / 6.8m</strong>
+            <strong>{props.creepScore} / {props.creepScorePerMin}m</strong>
           </div>
 
           <div className='card__body__stats__duration'>
             <p>Duration</p>
-            <strong>1hr 20m</strong>
+            <strong>{props.gameDuration}</strong>
           </div>
         </div>
       </section>
@@ -40,20 +42,16 @@ const SummonerCard = (props) => {
       <section className='card__footer'>
         <div className='card__footer__runes'>
           <p>Runes</p>
-          <ul>
-            <li>one</li>
-            <li>two</li>
-            <li>three</li>
-          </ul>
+          <ul>{
+            props.spells.map(spell => <li>{spell}</li>)
+          }</ul>
         </div>
 
         <div className='card__footer__items'>
           <p>Items</p>
-          <ul>
-            <li>one</li>
-            <li>two</li>
-            <li>three</li>
-          </ul>
+          <ul>{
+            props.items.map(item => <li>{item}</li>)
+          }</ul>
         </div>
       </section>
     </article>

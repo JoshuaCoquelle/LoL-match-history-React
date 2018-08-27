@@ -1,13 +1,14 @@
 .app__title {
   font-size: 26px;
   font-weight: 600;
-  color: var(--theme-grey-primary);
+  background: var(--theme-blue-secondary);
+  color: #DB2B44;
   text-align: center;
-  padding: 20px 25px;
+  padding: 30px 0;
 }
 
 .app__content {
-  padding: 20px;
+  padding: 30px 20px;
   margin: auto;
-  max-width: 400px;
+  max-width: 500px;
 }

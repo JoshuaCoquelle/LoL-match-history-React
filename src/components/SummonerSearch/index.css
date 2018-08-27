@@ -18,9 +18,17 @@
 .search__btn {
   height: 40px;
   width: 70px;
+  outline: none;
+  cursor: pointer;
   margin-left: 10px;
   border-radius: 2px;
+  transition: .5s ease;
   border: 1px solid #2D3D56;
   color: var(--theme-grey-primary);
   background: var(--theme-blue-secondary);
+}
+
+.search__btn:hover {
+  background: var(--theme-blue-primary);
+  border: 1px solid var(--theme-grey-secondary);
 }

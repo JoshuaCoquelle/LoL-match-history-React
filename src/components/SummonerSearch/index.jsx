@@ -5,7 +5,7 @@ const SummonerSearch = (props) => {
   let value = ''
 
   const currentValue = (e) => {
-    value = e.target.value.trim()
+    value = e.target.value.trim() || ''
   }
 
   return (

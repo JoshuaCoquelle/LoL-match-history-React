@@ -2,18 +2,45 @@ import React from 'react'
 import SummonerCard from '../SummonerCard/index'
 import './index.css'
 
-const renderMatchCards = (matches) => {
-  return matches.map((card, $i) => <SummonerCard key={$i} />)
+const renderMatchCards = ({ accountName, latestMatches }) => {
+  const cards = latestMatches.map((card, $i) => {
+    return (
+      <SummonerCard
+        key={$i}
+        accountName={accountName}
+        {...card}
+      />
+    )
+  })
+
+  // const cards = latestMatches.map((card, $i) => (
+  //   console.log(card)
+  //   console.log('------------------------')
+
+  //   <SummonerCard
+  //     key={$i}
+  //     accountName={accountName}
+  //   />
+  // ))
+
+  if (cards.length) {
+    return (
+      <div>
+        <p className='history__latest-msg'>
+          showing latest {cards.length} matches
+        </p>
+        {cards}
+      </div>
+    )
+  }
+
+  return <p className='history__latest-msg'>No match history available</p>
 }
 
-const SummonerHistory = ({ matches }) => {
+const SummonerHistory = (props) => {
   return (
     <div className='history'>
-      <p className='history__latest-msg'>
-        showing latest 5 matches
-      </p>
-
-      {renderMatchCards(matches)}
+      {renderMatchCards(props)}
     </div>
   )
 }

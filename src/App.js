@@ -1,20 +1,25 @@
-import React, { Component } from 'react'
 import axios from 'axios'
+import React, { Component } from 'react'
 import SummonerSearch from './components/SummonerSearch'
 import SummonerHistory from './components/SummonerHistory'
 import './App.css'
 
 class App extends Component {
   state = {
-    matchHistory: [],
+    accountName: '',
+    latestMatches: []
   }
 
-  async handleSearch (value) {
-    try {
-      const response = await axios.get(`http://localhost:3001/api/summoner/${value}`)
-      const { payload } = response.data
+  async handleSearch (accountName) {
+    if (!accountName) return
 
-      this.setState({ matchHistory: payload })
+    try {
+      const { data } = await axios.get(`http://localhost:3001/api/summoner/${accountName}`)
+
+      this.setState({
+        accountName,
+        latestMatches: data.payload
+      })
     } catch (err) {
       console.warn(err)
     }
@@ -24,7 +29,7 @@ class App extends Component {
     return (
       <main className='app'>
         <header className='app__title'>
-          SUMMONER SEARCH
+          LF> Summoner LoL
         </header>
 
         <section className='app__content'>
@@ -33,7 +38,10 @@ class App extends Component {
             placeholder='summmoner name'
           />
 
-          <SummonerHistory matches={[1,2,3]}/>
+          <SummonerHistory
+            accountName={this.state.accountName}
+            latestMatches={this.state.latestMatches}
+          />
         </section>
       </main>
     )
