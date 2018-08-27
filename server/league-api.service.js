@@ -30,7 +30,7 @@ module.exports = class LeagueAPI {
 
       return response.data.accountId
     } catch (err) {
-      console.error(err)
+      return err
     }
   }
 
@@ -41,7 +41,7 @@ module.exports = class LeagueAPI {
 
       return response.data.matches
     } catch (err) {
-      console.error(err)
+      return err
     }
   }
 
@@ -55,7 +55,7 @@ module.exports = class LeagueAPI {
       const results = await Promise.all(batch)
       return results.map(result => result.data)
     } catch (err) {
-      console.error(err)
+      return err
     }
   }
 

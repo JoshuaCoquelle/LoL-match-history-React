@@ -43,14 +43,14 @@ const SummonerCard = (props) => {
         <div className='card__footer__spells'>
           <p>Spells</p>
           <ul>{
-            props.spells.map(spell => <li>{spell}</li>)
+            props.spells.map((spell, $i) => <li key={$i}>{spell}</li>)
           }</ul>
         </div>
 
         <div className='card__footer__items'>
           <p>Items</p>
           <ul>{
-            props.items.map(item => <li>{item}</li>)
+            props.items.map((item, $i) => <li key={$i}>{item}</li>)
           }</ul>
         </div>
       </section>

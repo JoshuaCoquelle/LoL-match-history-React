@@ -15,7 +15,7 @@ class App extends Component {
     latestMatches: []
   }
 
-  handleSearch = async (accountName) => {
+  async handleSearch (accountName) {
     if (!accountName) return
 
     try {
@@ -24,7 +24,7 @@ class App extends Component {
 
       this.setState({ accountName, latestMatches })
     } catch (err) {
-      console.warn(err)
+      console.error(err)
     }
   }
 
