@@ -6,6 +6,7 @@ const SummonerCard = (props) => {
 
   return (
     <article className={props.win ? 'card card--won' : 'card card--lost'}>
+      { /* Card Header */ }
       <section className='card__header'>
         <p className='card__header__title'>
           NAME
@@ -16,6 +17,7 @@ const SummonerCard = (props) => {
         </div>
       </section>
 
+      { /* Card Body */ }
       <section className='card__body'>
         <p className='card__body__account'>
           {props.accountName}
@@ -39,6 +41,7 @@ const SummonerCard = (props) => {
         </div>
       </section>
 
+      { /* Card Footer */ }
       <section className='card__footer'>
         <div className='card__footer__spells'>
           <p>Spells</p>

@@ -6,6 +6,15 @@ const {
 } = require('../keys')
 
 module.exports = class LeagueAPI {
+  /**
+   * Handler for summoner search route by name.
+   * /summoner/:name
+   *
+   * @static
+   * @param {string} { params } - express params for name
+   * @param {object} res - express response object
+   * @returns {object}
+   */
   static async searchSummonerHandler ({ params }, res) {
     const summonerByName = `${REACT_APP_LOL_API_BASE}/summoner/v3/summoners/by-name`
     const summonerMatchlist = `${REACT_APP_LOL_API_BASE}/match/v3/matchlists/by-account`
@@ -23,6 +32,14 @@ module.exports = class LeagueAPI {
     }
   }
 
+  /**
+   * Retrieve the account ID by username
+   *
+   * @static
+   * @param {string} path - request url for API
+   * @param {string} name - the user name to query
+   * @returns {promise}
+   */
   static async accountIdByName (path, name) {
     try {
       const summonerByNameURL = `${path}/${name}?api_key=${REACT_APP_LOL_API_KEY}`
@@ -34,6 +51,14 @@ module.exports = class LeagueAPI {
     }
   }
 
+  /**
+   * Get matchlist for the desired account ID
+   *
+   * @static
+   * @param {string} path - request url for API
+   * @param {any} accountId - user account ID
+   * @returns
+   */
   static async matchlistByAccountId (path, accountId) {
     try {
       const summonerMatchlistUrl = `${path}/${accountId}?api_key=${REACT_APP_LOL_API_KEY}`
@@ -45,6 +70,15 @@ module.exports = class LeagueAPI {
     }
   }
 
+  /**
+   * Create matches batch axios request for getting individual match data
+   *
+   * @static
+   * @param {number} batchSize - how many matches to retrieve
+   * @param {string} path - request url for API
+   * @param {array} matchlist - list of user account matches
+   * @returns {promise}
+   */
   static async getMatchesBatch (batchSize, path, matchlist) {
     const matches = matchlist.slice(0, batchSize)
     const batch = matches.map(
@@ -59,6 +93,14 @@ module.exports = class LeagueAPI {
     }
   }
 
+  /**
+   * Build payload with class helper methods for returning to client
+   *
+   * @static
+   * @param {number} accountId - user account ID
+   * @param {array} matches - batch of matches to parse
+   * @returns {object}
+   */
   static _buildPayload (accountId, matches) {
     return matches.map(match => {
       const playerId = LeagueAPI._parsePlayerId(accountId, match.participantIdentities)
@@ -69,12 +111,28 @@ module.exports = class LeagueAPI {
     })
   }
 
+  /**
+   * Helper to extract player ID from particpants collection
+   *
+   * @static
+   * @param {any} accountId - user account ID
+   * @param {any} participantIdentities - all matches participants
+   * @returns
+   */
   static _parsePlayerId (accountId, participantIdentities) {
     return participantIdentities
       .filter(participant => participant.player.accountId === accountId)
       .map(player => player.participantId)[0]
   }
 
+  /**
+   * Parse only desired data from full match data
+   *
+   * @static
+   * @param {number} playerId - the current players ID for the match
+   * @param {array} participants - list of all participants
+   * @returns
+   */
   static _parsePlayerMatchData (playerId, participants) {
     return participants
       .filter(participant => participant.participantId === playerId)
@@ -84,6 +142,14 @@ module.exports = class LeagueAPI {
       })
   }
 
+  /**
+   * Reduce all stat data from the players match data to return to client
+   *
+   * @static
+   * @param {array} playerData - player data chunk from each match
+   * @param {number} gameDuration - game duration in (ms)
+   * @returns
+   */
   static _parseStatsForPayload (playerData, gameDuration) {
     return playerData.reduce((accum, data) => {
       const { stats, spell1Id, spell2Id, championId } = data
